@@ -1,0 +1,382 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #FF1744 0%, #FF6B6B 25%, #FF8E53 50%, #FF6B6B 75%, #FF1744 100%);
+    background-size: 400% 400%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+/* Yıldızlar */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Parçacıklar */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.container {
+    text-align: center;
+    z-index: 1;
+    position: relative;
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lightning-container {
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+}
+
+.lightning {
+    font-size: 140px;
+    animation: flash 1.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 0, 1)) 
+            drop-shadow(0 0 60px rgba(255, 215, 0, 0.8));
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+}
+
+.lightning-trail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 0, 0.4) 0%, transparent 70%);
+    animation: pulseGlow 1.2s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.3;
+    }
+}
+
+@keyframes flash {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 30px rgba(255, 255, 0, 1)) 
+                drop-shadow(0 0 60px rgba(255, 215, 0, 0.8));
+    }
+    25% {
+        transform: scale(1.15) rotate(-5deg);
+        filter: drop-shadow(0 0 40px rgba(255, 255, 0, 1.2)) 
+                drop-shadow(0 0 80px rgba(255, 215, 0, 1));
+    }
+    50% { 
+        transform: scale(1.3) rotate(10deg);
+        opacity: 0.9;
+        filter: drop-shadow(0 0 50px rgba(255, 255, 0, 1.5)) 
+                drop-shadow(0 0 100px rgba(255, 215, 0, 1.2));
+    }
+    75% {
+        transform: scale(1.15) rotate(-5deg);
+        filter: drop-shadow(0 0 40px rgba(255, 255, 0, 1.2)) 
+                drop-shadow(0 0 80px rgba(255, 215, 0, 1));
+    }
+}
+
+.title {
+    font-size: 52px;
+    color: #fff;
+    text-shadow: 
+        4px 4px 0px #000,
+        0 0 30px rgba(255, 255, 255, 0.8),
+        0 0 60px rgba(255, 215, 0, 0.6);
+    margin-bottom: 50px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.title-char {
+    display: inline-block;
+    animation: bounceChar 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes bounceChar {
+    0%, 100% { 
+        transform: translateY(0) scale(1);
+    }
+    50% { 
+        transform: translateY(-15px) scale(1.1);
+    }
+}
+
+.buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 22px 55px;
+    font-size: 26px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-shine {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 70%
+    );
+    animation: shine 3s infinite;
+    z-index: 1;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+.btn-yes {
+    background: linear-gradient(135deg, #4CAF50, #45a049, #66BB6A);
+    background-size: 200% 200%;
+    color: white;
+    animation: gradientMove 3s ease infinite;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes gradientMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.btn-yes:hover {
+    transform: scale(1.15) translateY(-5px);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.7),
+                0 0 50px rgba(76, 175, 80, 0.5);
+    animation: gradientMove 1s ease infinite, pulseBtn 0.5s ease infinite;
+}
+
+@keyframes pulseBtn {
+    0%, 100% { transform: scale(1.15) translateY(-5px); }
+    50% { transform: scale(1.2) translateY(-8px); }
+}
+
+.btn-yes:active {
+    transform: scale(1.05) translateY(-2px);
+}
+
+.btn-no {
+    background: linear-gradient(135deg, #9e9e9e, #757575);
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.6;
+    position: relative;
+    transition: all 0.2s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-no:hover {
+    opacity: 0.8;
+}
+
+.message {
+    margin-top: 40px;
+    font-size: 36px;
+    color: #fff;
+    text-shadow: 
+        3px 3px 6px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(255, 215, 0, 0.8);
+    font-weight: bold;
+    min-height: 60px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(-20px) scale(0.9);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Kalpler */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.heart {
+    position: absolute;
+    font-size: 30px;
+    color: #FF1744;
+    animation: heartFloat 3s ease-out forwards;
+    pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(255, 23, 68, 0.8));
+}
+
+@keyframes heartFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) scale(1.5) rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 32px;
+    }
+    
+    .lightning {
+        font-size: 80px;
+    }
+    
+    .btn {
+        padding: 15px 35px;
+        font-size: 20px;
+    }
+    
+    .buttons {
+        gap: 20px;
+    }
+}
+
